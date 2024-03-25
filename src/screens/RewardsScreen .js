@@ -5,10 +5,10 @@ import RewardHeader from '../components/reward/ReawardHeader';
 import axios from 'react-native-axios'
 
 const RewardsScreen = () => {
-  const points = 75;
+  const points = 100;
   const [nfts, setNfts] = useState([]);
-  const xKey = "2neS76iK3K9IVD5y"; // Thay thế bằng x-api-key chịu phí
-  const adminWallID = "5wbGvpCsCznhoRCxWaJaJbtaXsiph55rQPGR7LBKaQe2"; // Địa chỉ ví Admin chứa NFTs
+  const xKey = "r_dyunuuAWO7c5DU"; // Thay thế bằng x-api-key chịu phí
+  const adminWallID = "7VhpHtwVWdUPoMGVyTaC6XqHs7SfShAr8963fqUscFsu"; // Địa chỉ ví Admin chứa NFTs
   const toAddress = "CfHt2GWCKmPJFfmWxishL2ERxbDkTioqX2E4pBNZzs3H";// Địa chỉ ví người dùng nhận NFT sẽ lấy từ account info
   const network = "devnet"; // Sử dụng mạng devnet
 
@@ -40,6 +40,11 @@ const RewardsScreen = () => {
 
   const transferNFT = async (tokenAddress, adminWallID, toAddress) => {
     console.log(`Transferring NFT with tokenAddress: ${tokenAddress}`);
+    if (points < 100) { // Assuming 100 points are required for all NFTs
+      Alert.alert("Insufficient Points", "You do not have enough points to claim this NFT.");
+      return;
+    }
+
     const transferUrl = "https://api.shyft.to/sol/v1/nft/transfer_detach";
     const data = JSON.stringify({
       network: "devnet",
@@ -58,6 +63,7 @@ const RewardsScreen = () => {
         },
       });
       console.log(response.data);
+      setNfts(nfts.filter(nft => nft.id !== tokenAddress));
       Alert.alert("Success", "NFT transferred successfully");
     } catch (error) {
       console.error(error);
