@@ -67,7 +67,7 @@ export default function App() {
                   : CombinedDefaultTheme
               }
             >
-              <AppNavigator />
+            <AppNavigator />
             </PaperProvider>
           </SafeAreaView>
         </ConnectionProvider>

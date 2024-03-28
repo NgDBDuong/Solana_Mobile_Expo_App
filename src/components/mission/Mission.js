@@ -58,7 +58,7 @@ const Mission = () => {
         <View key={item.id} style={styles.mission}>
           <Text style={styles.textMission}>{item.tenNV}</Text>
             <Text style={styles.textcc}><Text>Mức độ : {item.level}      </Text><Text>+{item.point}</Text> <Image
-          source={require('../../../assets/diem.png')} // Replace with your points icon image path
+          source={require('../../../assets/diem.png')}
           style={styles.pointsIcon}
         />
           </Text>

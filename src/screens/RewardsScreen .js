@@ -5,7 +5,7 @@ import RewardHeader from '../components/reward/ReawardHeader';
 import axios from 'react-native-axios'
 
 const RewardsScreen = () => {
-  const points = 100;
+  const [points, setPoints] = useState(100);
   const [nfts, setNfts] = useState([]);
   const xKey = "r_dyunuuAWO7c5DU"; // Thay thế bằng x-api-key chịu phí
   const adminWallID = "7VhpHtwVWdUPoMGVyTaC6XqHs7SfShAr8963fqUscFsu"; // Địa chỉ ví Admin chứa NFTs
@@ -64,6 +64,7 @@ const RewardsScreen = () => {
       });
       console.log(response.data);
       setNfts(nfts.filter(nft => nft.id !== tokenAddress));
+      setPoints((currentPoints) => currentPoints - 100);
       Alert.alert("Success", "NFT transferred successfully");
     } catch (error) {
       console.error(error);
@@ -88,9 +89,9 @@ const RewardsScreen = () => {
     <View style={styles.container}>
       <RewardHeader points={points} />
       <View style={styles.headerContainer}>
-        <Text style={styles.headerTitle}>Quà tặng</Text>
+        <Text style={styles.headerTitle}>Đổi NFT</Text>
         <TouchableOpacity onPress={() => console.log('View all pressed')}>
-          <Text style={styles.viewAllText}>Xem tất cả</Text>
+          {/* <Text style={styles.viewAllText}>Xem NFT của bạn</Text> */}
         </TouchableOpacity>
       </View>
       <Text style={styles.headerSubtitle}>Tích điểm đổi quà NFTs</Text>
